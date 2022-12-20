@@ -5,7 +5,7 @@ import useStyles from "./styles";
 const Form = () => {
     const classes= useStyles();
   return (
-    <div>Form</div>
+    <div><h1>FORM</h1></div>
   )
 }
 
