@@ -5,26 +5,24 @@ import { useDispatch, useSelector } from "react-redux";
 import useStyles from "./styles";
 import { createPost, updatePost } from '../../actions/posts';
 
-const Form = (currentId, setCurrentId) => {
+const Form = (currentId) => {
   const [postData, setPostdata] = useState({ creator: '', title: '', tags: '', selectedFile: '' });
   const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId.currentId) : null);
   const classes = useStyles();
   const dispatch = useDispatch();
 
+  console.log(currentId);
+
   useEffect(() => {
-    console.log("postdata", post);
     if (post) setPostdata(post);
   }, [post])
 
-  console.log("fjghj",currentId);
-  console.log("selected data", post);
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!currentId.currentId) {
       dispatch(createPost(postData));
       clear();
     } else {
-      console.log("updated")
       dispatch(updatePost(currentId.currentId, postData));
       clear();
     }
@@ -32,7 +30,7 @@ const Form = (currentId, setCurrentId) => {
 
   const clear = () => {
     setPostdata({ creator: '', title: '', message: '', tags: '', selectedFile: '' });
-    setCurrentId(null);
+    currentId.setCurrentId(null);
   }
 
   return (
